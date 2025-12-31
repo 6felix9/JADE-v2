@@ -47,15 +47,15 @@ export default function Step2SummarySelection({ state, updateState }: Step2Props
     <div className="space-y-8 animate-in fade-in duration-500">
       {state.isCheckingSummaries ? (
         <div className="flex flex-col items-center justify-center p-20 space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="text-gray-500 font-medium animate-pulse">Checking Library for existing summaries...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          <p className="text-muted font-medium animate-pulse">Checking Library for existing summaries...</p>
         </div>
       ) : (
         <div className="space-y-6">
           {state.hasExistingSummaries && (
             <SectionCard className="p-4">
               <div className="space-y-3">
-                <div className="flex items-center space-x-3 p-3 bg-amber-50 border border-amber-100 rounded-lg text-amber-900">
+                <div className="flex items-center space-x-3 p-3 bg-warning/10 border border-warning/20 rounded-lg text-warning">
                   <AlertCircle className="w-5 h-5 flex-shrink-0" />
                   <p className="text-sm font-medium">
                     A Job Summary already exists for one or more jobs in the Library.
@@ -72,8 +72,8 @@ export default function Step2SummarySelection({ state, updateState }: Step2Props
                     <span>View existing summaries</span>
                   </Button>
 
-                  <div className="pt-3 border-t border-gray-100">
-                    <p className="text-xs font-semibold text-gray-900 mb-2">
+                  <div className="pt-3 border-t border-border">
+                    <p className="text-xs font-semibold text-foreground mb-2">
                       Do you want to use these existing summaries, or create new ones to be used for the AI evaluation?
                     </p>
                     <RadioGroup
@@ -95,7 +95,7 @@ export default function Step2SummarySelection({ state, updateState }: Step2Props
                   </div>
 
                   {state.summaryOption === "create-new" && state.finalSummaries.length === 0 && (
-                    <div className="pt-3 border-t border-gray-100">
+                    <div className="pt-3 border-t border-border">
                       <Button 
                         onClick={handleGenerateSummaries}
                         className="w-full"
@@ -115,15 +115,15 @@ export default function Step2SummarySelection({ state, updateState }: Step2Props
           >
             {state.finalSummaries.length > 0 ? (
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-blue-50 border border-blue-100 rounded-lg">
-                  <div className="flex items-center space-x-3 text-blue-900 font-medium">
+                <div className="flex items-center justify-between p-4 bg-primary/10 border border-primary/20 rounded-lg">
+                  <div className="flex items-center space-x-3 text-primary font-medium">
                     <FileText className="w-6 h-6" />
                     <span>{state.finalSummaries.length} Job summaries generated</span>
                   </div>
                   <Button 
                     variant="ghost" 
                     onClick={() => updateState({ isSummaryExpanded: !state.isSummaryExpanded })}
-                    className="text-blue-600 hover:text-blue-700 font-semibold flex items-center space-x-1"
+                    className="text-primary hover:text-primary-hover font-semibold flex items-center space-x-1"
                   >
                     <span>Click to {state.isSummaryExpanded ? 'hide' : 'view'}</span>
                     {state.isSummaryExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -137,8 +137,8 @@ export default function Step2SummarySelection({ state, updateState }: Step2Props
                 )}
               </div>
             ) : !state.hasExistingSummaries ? (
-              <div className="p-12 border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center space-y-3 text-gray-400">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              <div className="p-12 border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center space-y-3 text-muted">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
                 <p>Generating summaries...</p>
               </div>
             ) : null}

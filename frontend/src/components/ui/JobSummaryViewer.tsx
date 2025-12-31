@@ -13,20 +13,20 @@ export default function JobSummaryViewer({ summaries }: JobSummaryViewerProps) {
       {summaries.map((summary, index) => (
         <div 
           key={summary.jobId || index} 
-          className="border border-gray-200 rounded-lg p-4 bg-gray-50 space-y-2 hover:border-blue-200 transition-colors"
+          className="border border-border rounded-lg p-4 bg-surface space-y-2 hover:border-primary/30 transition-colors"
         >
           <div className="flex items-center justify-between">
-            <h4 className="font-bold text-gray-900 flex items-center space-x-2">
-              <FileText className="w-4 h-4 text-blue-600" />
+            <h4 className="font-bold text-foreground flex items-center space-x-2">
+              <FileText className="w-4 h-4 text-primary" />
               <span>{summary.jobTitle}</span>
             </h4>
-            <span className="text-xs text-gray-400">{summary.jobId}</span>
+            <span className="text-xs text-muted">{summary.jobId}</span>
           </div>
-          <p className="text-sm text-gray-700 leading-relaxed italic">
+          <p className="text-sm text-foreground leading-relaxed italic">
             {`"${summary.summary}"`}
           </p>
           {summary.createdAt && (
-            <p className="text-[10px] text-gray-400 text-right">Last updated: {summary.createdAt}</p>
+            <p className="text-[10px] text-muted text-right">Last updated: {summary.createdAt}</p>
           )}
         </div>
       ))}

@@ -16,8 +16,8 @@ export default function FactorSelection({ selectedFactors, onFactorToggle }: Fac
           key={key} 
           className={`flex items-center p-4 border rounded-xl cursor-pointer transition-all ${
             value 
-              ? "border-blue-500 bg-blue-50" 
-              : "border-gray-200 bg-white hover:border-gray-300"
+              ? "border-primary bg-primary/10" 
+              : "border-border bg-background hover:border-border/80"
           }`}
         >
           <input
@@ -27,11 +27,11 @@ export default function FactorSelection({ selectedFactors, onFactorToggle }: Fac
             onChange={() => onFactorToggle(key as keyof WizardState["selectedFactors"])}
           />
           <div className={`w-5 h-5 rounded-md border flex items-center justify-center mr-3 transition-colors ${
-            value ? "bg-blue-600 border-blue-600" : "bg-white border-gray-300"
+            value ? "bg-primary border-primary" : "bg-background border-border"
           }`}>
-            {value && <CheckCircle className="w-4 h-4 text-white" />}
+            {value && <CheckCircle className="w-4 h-4 text-background" />}
           </div>
-          <span className={`capitalize font-medium ${value ? "text-blue-900" : "text-gray-700"}`}>
+          <span className={`capitalize font-medium ${value ? "text-primary" : "text-foreground"}`}>
             {key}
           </span>
         </label>

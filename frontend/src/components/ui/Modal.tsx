@@ -46,16 +46,15 @@ export default function Modal({ isOpen, onClose, title, children, size = "md" }:
       
       {/* Modal Content */}
       <div 
-        className={`relative bg-white rounded-xl shadow-xl w-full ${sizeClasses[size]} overflow-hidden animate-in zoom-in-95 fade-in duration-200`}
+        className={`relative bg-background rounded-xl shadow-xl w-full ${sizeClasses[size]} overflow-hidden animate-in zoom-in-95 fade-in duration-200`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between p-4 border-b border-gray-100">
-          <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+        <div className="flex items-center justify-between p-4 border-b border-border">
+          <h2 className="text-xl font-bold text-foreground">{title}</h2>
           <Button
             variant="ghost"
-            size="sm"
+            size="icon"
             onClick={onClose}
-            className="!p-1 rounded-full"
           >
             <X className="w-6 h-6" />
           </Button>

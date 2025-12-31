@@ -142,7 +142,7 @@ export default function EvaluateJobPage() {
   const isCurrentStepValid = currentStepConfig?.validate(wizardState) ?? false;
 
   return (
-    <main className="min-h-screen bg-gray-50 flex flex-col pb-12">
+    <main className="min-h-screen bg-surface flex flex-col pb-12">
       <Header />
       
       <div className="max-w-4xl mx-auto w-full px-6 pt-8 space-y-8">
@@ -156,10 +156,10 @@ export default function EvaluateJobPage() {
           {WIZARD_STEPS.map((step) => (
             <div key={step.id} className="flex flex-col items-center flex-1">
               <div className={`h-1 w-full rounded-full ${
-                step.id <= wizardState.currentStep ? "bg-blue-600" : "bg-gray-200"
+                step.id <= wizardState.currentStep ? "bg-primary" : "bg-border"
               }`} />
               <span className={`text-[10px] uppercase font-bold mt-2 ${
-                step.id === wizardState.currentStep ? "text-blue-600" : "text-gray-400"
+                step.id === wizardState.currentStep ? "text-primary" : "text-muted"
               }`}>
                 {step.label}
               </span>

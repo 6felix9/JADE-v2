@@ -54,16 +54,16 @@ export default function ActionButtons({
   const shouldShowBack = onBack && showBack;
 
   return (
-    <div className="flex justify-between items-center pt-8 border-t border-gray-100 mt-4">
+    <div className="flex justify-between items-center pt-8 border-t border-border mt-4">
       <div className="flex space-x-4">
         {shouldShowBack && (
-          <Button variant="secondary" onClick={onBack} disabled={backDisabled}>
+          <Button variant="outline" onClick={onBack} disabled={backDisabled}>
             {backLabel}
           </Button>
         )}
         <div className="flex space-x-4">
           {shouldShowCancel && (
-            <Button variant="secondary" onClick={onCancel} disabled={cancelDisabled}>
+            <Button variant="ghost" onClick={onCancel} disabled={cancelDisabled}>
               {cancelLabel}
             </Button>
           )}
@@ -79,7 +79,7 @@ export default function ActionButtons({
         <Button
           disabled={nextDisabled}
           onClick={onNext}
-          className="font-bold"
+          className="font-bold min-w-[120px]"
         >
           {nextLabel}
         </Button>

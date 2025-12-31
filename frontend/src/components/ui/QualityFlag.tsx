@@ -8,12 +8,12 @@ interface QualityFlagProps {
 export default function QualityFlag({ status, message }: QualityFlagProps) {
   const isPassed = status === "passed";
   
-  const bgColor = isPassed ? "bg-green-50" : "bg-red-50";
-  const borderColor = isPassed ? "border-green-100" : "border-red-100";
-  const textColor = isPassed ? "text-green-900" : "text-red-900";
-  const iconColor = isPassed ? "text-green-600" : "text-red-600";
-  const badgeBg = isPassed ? "bg-green-100" : "bg-red-100";
-  const badgeText = isPassed ? "text-green-600" : "text-red-600";
+  const bgColor = isPassed ? "bg-success/10" : "bg-danger/10";
+  const borderColor = isPassed ? "border-success/20" : "border-danger/20";
+  const textColor = isPassed ? "text-success" : "text-danger";
+  const iconColor = isPassed ? "text-success" : "text-danger";
+  const badgeBg = isPassed ? "bg-success/20" : "bg-danger/20";
+  const badgeText = isPassed ? "text-success" : "text-danger";
   const Icon = isPassed ? CheckCircle2 : AlertCircle;
 
   return (
@@ -24,7 +24,7 @@ export default function QualityFlag({ status, message }: QualityFlagProps) {
           <span className={`font-semibold ${textColor}`}>
             {isPassed ? "Quality Check Passed" : "Quality Check Failed"}
           </span>
-          {message && <p className={`text-sm ${isPassed ? "text-green-700" : "text-red-700"}`}>{message}</p>}
+          {message && <p className={`text-sm ${textColor}`}>{message}</p>}
         </div>
       </div>
       <div className={`text-xs font-bold uppercase tracking-wider ${badgeText} ${badgeBg} px-2 py-1 rounded`}>

@@ -75,7 +75,7 @@ export default function Step3JobScoring({ state, updateState }: Step3Props) {
       {!state.showResults && (
         <SectionCard title="Generate AI Evaluation">
           <div className="flex flex-col items-center space-y-4 py-4">
-            <p className="text-gray-600 text-center max-w-md">
+            <p className="text-muted text-center max-w-md">
               The AI will analyze the job summaries based on your selected factors to determine the job level and scores.
             </p>
             <Button 
@@ -85,7 +85,7 @@ export default function Step3JobScoring({ state, updateState }: Step3Props) {
             >
               {state.isScoring ? (
                 <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-background"></div>
                   <span>Scoring Jobs...</span>
                 </div>
               ) : (
@@ -105,22 +105,22 @@ export default function Step3JobScoring({ state, updateState }: Step3Props) {
           >
             <div className="space-y-4">
               {state.evaluationResults.map((result) => (
-                <div key={result.jobId} className="border border-gray-200 rounded-xl overflow-hidden">
+                <div key={result.jobId} className="border border-border rounded-xl overflow-hidden">
                   <button 
                     onClick={() => toggleResult(result.jobId)}
-                    className="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition-colors"
+                    className="w-full flex items-center justify-between p-4 bg-surface hover:bg-border/10 transition-colors"
                   >
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                         <BarChart3 className="w-5 h-5" />
                       </div>
                       <div className="text-left">
-                        <h4 className="font-bold text-gray-900">{result.jobTitle}</h4>
+                        <h4 className="font-bold text-foreground">{result.jobTitle}</h4>
                         <div className="flex items-center space-x-2 mt-1">
-                           <span className="text-xs font-medium px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">
+                           <span className="text-xs font-medium px-2 py-0.5 bg-primary/10 text-primary rounded-full">
                             Overall: {result.overallScore}
                           </span>
-                          <span className="text-xs font-medium px-2 py-0.5 bg-green-100 text-green-700 rounded-full">
+                          <span className="text-xs font-medium px-2 py-0.5 bg-success/10 text-success rounded-full">
                             {result.confidence}% confidence
                           </span>
                         </div>
@@ -130,14 +130,14 @@ export default function Step3JobScoring({ state, updateState }: Step3Props) {
                   </button>
                   
                   {expandedResults[result.jobId] && (
-                    <div className="p-6 bg-white border-t border-gray-100 animate-in slide-in-from-top-2 duration-200">
-                      <h5 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Factor Scores</h5>
+                    <div className="p-6 bg-background border-t border-border animate-in slide-in-from-top-2 duration-200">
+                      <h5 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Factor Scores</h5>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {Object.entries(result.scores).map(([factor, score]) => (
                           <div key={factor} className="space-y-2">
                             <div className="flex justify-between items-center">
-                              <span className="text-sm font-medium text-gray-700 capitalize">{factor}</span>
-                              <span className="text-sm font-bold text-blue-600">{score}/5</span>
+                              <span className="text-sm font-medium text-foreground capitalize">{factor}</span>
+                              <span className="text-sm font-bold text-primary">{score}/5</span>
                             </div>
                           </div>
                         ))}

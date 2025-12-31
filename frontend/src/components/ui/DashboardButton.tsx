@@ -13,16 +13,13 @@ export default function DashboardButton({
     variant = "default",
     onClick,
 }: DashboardButtonProps) {
-    const dashboardVariants = {
-        default: "bg-white border-gray-200 text-gray-700 hover:border-gray-300",
-        highlighted: "bg-blue-50 border-blue-100 text-blue-900 hover:bg-blue-100 hover:border-blue-200",
-    };
-
     return (
         <Button
-            variant="secondary"
+            variant={variant === "highlighted" ? "highlight" : "secondary"}
+            size="xl"
+            fullWidth
             onClick={onClick}
-            className={`!p-8 !border-2 !text-lg !font-semibold h-32 w-full hover:shadow-md hover:-translate-y-1 ${dashboardVariants[variant]}`}
+            className="hover:shadow-md hover:-translate-y-1"
         >
             {title}
         </Button>
