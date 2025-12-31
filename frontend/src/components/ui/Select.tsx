@@ -1,9 +1,6 @@
 "use client";
 
-interface SelectOption {
-  value: string;
-  label: string;
-}
+import { SelectOption } from "@/types";
 
 interface SelectProps {
   value: string;

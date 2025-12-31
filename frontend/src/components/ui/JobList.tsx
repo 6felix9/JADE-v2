@@ -1,13 +1,7 @@
 "use client";
 
 import { ChevronDown, ChevronUp, FileText } from "lucide-react";
-
-interface JobData {
-  id: string;
-  job_title: string;
-  department: string;
-  [key: string]: any;
-}
+import { JobData } from "@/types";
 
 interface JobListProps {
   jobs: JobData[];

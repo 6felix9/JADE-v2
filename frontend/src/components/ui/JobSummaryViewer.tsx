@@ -1,13 +1,7 @@
 "use client";
 
 import { FileText } from "lucide-react";
-
-export interface JobSummary {
-  jobId: string;
-  jobTitle: string;
-  summary: string;
-  createdAt?: string;
-}
+import { JobSummary } from "@/types";
 
 interface JobSummaryViewerProps {
   summaries: JobSummary[];
@@ -29,7 +23,7 @@ export default function JobSummaryViewer({ summaries }: JobSummaryViewerProps) {
             <span className="text-xs text-gray-400">{summary.jobId}</span>
           </div>
           <p className="text-sm text-gray-700 leading-relaxed italic">
-            "{summary.summary}"
+            {`"${summary.summary}"`}
           </p>
           {summary.createdAt && (
             <p className="text-[10px] text-gray-400 text-right">Last updated: {summary.createdAt}</p>

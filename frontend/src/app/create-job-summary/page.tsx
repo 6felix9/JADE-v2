@@ -3,49 +3,18 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import PageHeader from "@/components/ui/PageHeader";
-import SectionCard from "@/components/ui/SectionCard";
-import ActionButtons from "@/components/ui/ActionButtons";
-import Modal from "@/components/ui/Modal";
-import JobSummaryViewer, { JobSummary } from "@/components/ui/JobSummaryViewer";
-import RadioGroup from "@/components/ui/RadioGroup";
-import Button from "@/components/ui/Button";
+import {
+  PageHeader,
+  SectionCard,
+  ActionButtons,
+  Modal,
+  JobSummaryViewer,
+  RadioGroup,
+  Button
+} from "@/components/ui";
 import { FileText, ChevronDown, ChevronUp, AlertCircle } from "lucide-react";
-
-// Mock data for existing summaries
-const MOCK_EXISTING_SUMMARIES: JobSummary[] = [
-  {
-    jobId: "01-0025",
-    jobTitle: "Assistant Vice President",
-    summary: "Strategic management of Cebu Regional Operations, overseeing compliance, revenue generation, and team collaboration across 10 departments.",
-    createdAt: "2025-12-15",
-  },
-  {
-    jobId: "01-0026",
-    jobTitle: "Finance Div Mgr",
-    summary: "Senior leadership role responsible for divisional financial strategy, budget oversight, and fiscal compliance reporting.",
-    createdAt: "2025-11-20",
-  }
-];
-
-// Mock data for new summaries
-const MOCK_NEW_SUMMARIES: JobSummary[] = [
-  {
-    jobId: "01-0025",
-    jobTitle: "Assistant Vice President",
-    summary: "Directs regional operations in Cebu, focusing on operational standards, inter-departmental synergy, and achieving financial KRAs.",
-  },
-  {
-    jobId: "01-0026",
-    jobTitle: "Finance Div Mgr",
-    summary: "Manages divisional finance functions, ensuring alignment with corporate budgeting goals and regulatory requirements.",
-  },
-  {
-    jobId: "01-0027",
-    jobTitle: "Operations Supervisor",
-    summary: "Supervises daily floor operations to maintain high service levels and operational efficiency within the division.",
-  }
-];
+import { JobSummary } from "@/types";
+import { mockExistingSummaries, mockNewSummaries } from "@/lib/mockData";
 
 export default function CreateJobSummaryPage() {
   const router = useRouter();
@@ -69,7 +38,7 @@ export default function CreateJobSummaryPage() {
   const handleOptionSelect = (val: string) => {
     setSummaryOption(val);
     if (val === "use-existing") {
-      setFinalSummaries(MOCK_EXISTING_SUMMARIES);
+      setFinalSummaries(mockExistingSummaries);
     } else {
       // Don't auto-generate for "create-new", wait for button click
       setFinalSummaries([]);
@@ -77,7 +46,7 @@ export default function CreateJobSummaryPage() {
   };
 
   const handleGenerateSummaries = () => {
-    setFinalSummaries(MOCK_NEW_SUMMARIES);
+    setFinalSummaries(mockNewSummaries);
   };
 
   const handleReset = () => {
@@ -219,7 +188,7 @@ export default function CreateJobSummaryPage() {
         title="Existing Job Summaries"
         size="lg"
       >
-        <JobSummaryViewer summaries={MOCK_EXISTING_SUMMARIES} />
+        <JobSummaryViewer summaries={mockExistingSummaries} />
         <div className="mt-6 flex justify-end">
           <Button onClick={() => setShowViewerModal(false)}>Close</Button>
         </div>

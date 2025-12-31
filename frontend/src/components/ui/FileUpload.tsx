@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { Upload } from "lucide-react";
+import Button from "./Button";
 
 interface FileUploadProps {
   onFileSelect: (file: File) => void;
@@ -21,12 +22,12 @@ export default function FileUpload({ onFileSelect, accept, label = "Import and c
   return (
     <div className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-12 bg-gray-50 space-y-4 transition-colors hover:border-blue-400">
       <Upload className="w-12 h-12 text-gray-400" />
-      <button
+      <Button
+        variant="primary"
         onClick={() => fileInputRef.current?.click()}
-        className="bg-blue-600 text-white px-6 py-2 rounded-md font-medium hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       >
         {label}
-      </button>
+      </Button>
       <input
         type="file"
         ref={fileInputRef}

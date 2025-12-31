@@ -1,12 +1,4 @@
-interface JobData {
-  id: string;
-  job_title: string;
-  department: string;
-  manager_info: {
-    name: string;
-  };
-  job_purpose: string;
-}
+import { JobData } from "@/types";
 
 interface JobPreviewProps {
   job: JobData;

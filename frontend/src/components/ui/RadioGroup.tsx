@@ -1,14 +1,11 @@
 "use client";
 
-interface RadioOption {
-  value: string;
-  label: string;
-}
+import { RadioOption } from "@/types";
 
 interface RadioGroupProps {
   options: RadioOption[];
   value: string;
-  onChange: (value: any) => void;
+  onChange: (value: string) => void;
   name: string;
   className?: string;
 }

@@ -3,63 +3,18 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import PageHeader from "@/components/ui/PageHeader";
-import SectionCard from "@/components/ui/SectionCard";
-import FileUpload from "@/components/ui/FileUpload";
-import QualityFlag from "@/components/ui/QualityFlag";
-import JobList from "@/components/ui/JobList";
-import RadioGroup from "@/components/ui/RadioGroup";
-import Select from "@/components/ui/Select";
-import ActionButtons from "@/components/ui/ActionButtons";
-
-interface JobData {
-  id: string;
-  job_title: string;
-  employee_id: string;
-  department: string;
-  manager_info: {
-    job_title: string;
-    name: string;
-  };
-  job_purpose: string;
-  [key: string]: any;
-}
-
-const MOCK_JOBS: JobData[] = [
-  {
-    id: "01-0025",
-    job_title: "Assistant Vice President",
-    employee_id: "01-0025",
-    department: "Cebu Regional Office",
-    manager_info: {
-      job_title: "Sr. Assistant Vice President - Regional Operations",
-      name: "Chito M. Recamadas",
-    },
-    job_purpose: "To manage the entire Cebu Regional Operations across all departments ensuring that the region operates in compliance with the standards set by the management.",
-  },
-  {
-    id: "01-0026",
-    job_title: "Finance Div Mgr",
-    employee_id: "01-0026",
-    department: "Finance Department",
-    manager_info: {
-      job_title: "Chief Financial Officer",
-      name: "Maria Santos",
-    },
-    job_purpose: "To oversee all financial operations, budgeting, and fiscal reporting for the division.",
-  },
-  {
-    id: "01-0027",
-    job_title: "Operations Supervisor",
-    employee_id: "01-0027",
-    department: "Operations",
-    manager_info: {
-      job_title: "Operations Manager",
-      name: "John Doe",
-    },
-    job_purpose: "To supervise daily operational activities and ensure efficiency in service delivery.",
-  },
-];
+import {
+  PageHeader,
+  SectionCard,
+  FileUpload,
+  QualityFlag,
+  JobList,
+  RadioGroup,
+  Select,
+  ActionButtons
+} from "@/components/ui";
+import { JobData } from "@/types";
+import { mockJobs } from "@/lib/mockData";
 
 export default function EvaluateMultipleJobsPage() {
   const router = useRouter();
@@ -73,7 +28,7 @@ export default function EvaluateMultipleJobsPage() {
   const handleFileUpload = (file: File) => {
     // In a real app, we'd parse the file. For now, we use mock data.
     console.log("File selected:", file.name);
-    setJobs(MOCK_JOBS);
+    setJobs(mockJobs);
     setQualityPassed(true); // Placeholder logic
   };
 
@@ -127,7 +82,7 @@ export default function EvaluateMultipleJobsPage() {
               <RadioGroup
                 name="comparison"
                 value={comparisonOption}
-                onChange={setComparisonOption}
+                onChange={(value) => setComparisonOption(value as "no" | "human")}
                 options={[
                   { value: "no", label: "No thanks" },
                   { value: "human", label: "Compare to Human Score(s)" }
