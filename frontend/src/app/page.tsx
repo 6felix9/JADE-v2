@@ -1,7 +1,12 @@
+"use client";
+
 import Header from "@/components/Header";
 import DashboardButton from "@/components/ui/DashboardButton";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
@@ -10,8 +15,14 @@ export default function Home() {
         <div className="w-full max-w-4xl space-y-6">
           {/* Top Rows - 2x2 Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <DashboardButton title="Evaluate a Job" />
-            <DashboardButton title="Evaluate Multiple Jobs" />
+            <DashboardButton 
+              title="Evaluate a Job" 
+              onClick={() => router.push("/evaluate-job")}
+            />
+            <DashboardButton 
+              title="Evaluate Multiple Jobs" 
+              onClick={() => router.push("/evaluate-multiple-jobs")}
+            />
             <DashboardButton title="Organizational Analysis" />
             <DashboardButton title="Validation & Reporting" />
           </div>

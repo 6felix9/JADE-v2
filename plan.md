@@ -6,6 +6,8 @@ Transitioning JADE from a high-volume batch CSV processor to a high-fidelity ver
 ---
 
 ## Project Structure
+
+```text
 /jade-v2
 ├── frontend/                  # Next.js App (The Product UI)
 │   ├── app/                   # App Router
@@ -68,7 +70,7 @@ Transitioning JADE from a high-volume batch CSV processor to a high-fidelity ver
 ├── plan.md
 ├── README.md
 └── package.json               # Optional (pnpm / turborepo later)
-
+```
 
 ## Phase 1: Foundation & Architecture Setup
 
