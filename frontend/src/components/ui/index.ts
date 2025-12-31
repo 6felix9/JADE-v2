@@ -6,6 +6,7 @@
 export { default as ActionButtons } from './ActionButtons';
 export { default as Button } from './Button';
 export { default as DashboardButton } from './DashboardButton';
+export { default as FactorSelection } from './FactorSelection';
 export { default as FileUpload } from './FileUpload';
 export { default as JobList } from './JobList';
 export { default as JobPreview } from './JobPreview';

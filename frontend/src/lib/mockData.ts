@@ -160,3 +160,35 @@ export const mockNewSummaries: JobSummary[] = [
     summary: "Supervises daily floor operations to maintain high service levels and operational efficiency within the division.",
   }
 ];
+
+// Mock evaluation results for Step 3
+export const mockEvaluationResults = [
+  {
+    jobId: "01-0025",
+    jobTitle: "Assistant Vice President",
+    scores: {
+      accountability: 4,
+      complexity: 5,
+      judgement: 4,
+      communication: 4,
+      impact: 5,
+      knowledge: 4,
+    },
+    overallScore: 4.3,
+    confidence: 87,
+  },
+  {
+    jobId: "01-0026",
+    jobTitle: "Finance Div Mgr",
+    scores: {
+      accountability: 5,
+      complexity: 4,
+      judgement: 5,
+      communication: 4,
+      impact: 4,
+      knowledge: 5,
+    },
+    overallScore: 4.5,
+    confidence: 92,
+  }
+];

@@ -50,3 +50,52 @@ export interface RadioOption {
   label: string;
   description?: string;
 }
+
+// Wizard State Interface
+export interface WizardState {
+  // Step tracking
+  currentStep: number;
+
+  // Step 1: Job Upload & Comparison
+  jobData: JobData | null; // For single job evaluation
+  jobs: JobData[]; // For multiple jobs evaluation
+  isMultipleJobs: boolean; // Flag to distinguish single vs multiple mode
+  qualityPassed: boolean | null;
+  comparisonOption: "no" | "human";
+  humanEvaluation: string;
+
+  // Step 2: Summary Selection
+  isCheckingSummaries: boolean;
+  hasExistingSummaries: boolean;
+  summaryOption: "use-existing" | "create-new" | null;
+  finalSummaries: JobSummary[];
+  showExistingSummariesModal: boolean;
+  isSummaryExpanded: boolean;
+
+  // Step 3: Job Scoring
+  selectedFactors: {
+    accountability: boolean;
+    complexity: boolean;
+    judgement: boolean;
+    communication: boolean;
+    impact: boolean;
+    knowledge: boolean;
+  };
+  isScoring: boolean;
+  evaluationResults: Array<{
+    jobId: string;
+    jobTitle: string;
+    scores: Record<string, number>;
+    overallScore: number;
+    confidence: number;
+  }>;
+  showResults: boolean;
+}
+
+// Wizard Step Configuration
+export interface StepConfig {
+  id: number;
+  title: string;
+  label: string;
+  validate: (state: WizardState) => boolean;
+}

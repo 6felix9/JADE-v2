@@ -76,12 +76,12 @@ Transitioning JADE from a high-volume batch CSV processor to a high-fidelity ver
 
 ### 1.1 Project Structure & Tooling
 - [x] Initialize monorepo structure with `/frontend`, `/backend`, `/shared`, `/infra` directories
-- [x] Set up Next.js 14+ with App Router in `/frontend`
+- [x] Set up Next.js 16.1.1 with App Router in `/frontend`
 - [x] Initialize FastAPI project in `/backend`
-- [x] Configure Supabase connection and environment variables
+- [ ] Configure Supabase connection and environment variables (partial - infra exists, client not integrated)
 - [x] Create `/shared` directory for contract types and constants
 - [x] Set up Docker Compose for local development
-- [x] Configure TypeScript and Python linting/formatting tools
+- [ ] Configure TypeScript and Python linting/formatting tools (partial - frontend only)
 - [x] Create `.env.example` files for both frontend and backend
 
 ### 1.2 Database Schema Design
@@ -100,13 +100,13 @@ Transitioning JADE from a high-volume batch CSV processor to a high-fidelity ver
 ## Phase 2: Backend Development (FastAPI)
 
 ### 2.1 Core API Infrastructure
-- [ ] Set up FastAPI app structure with `main.py`
-- [ ] Configure CORS for Next.js frontend
+- [x] Set up FastAPI app structure with `main.py`
+- [x] Configure CORS for Next.js frontend
 - [ ] Implement database session management (`db/session.py`)
 - [ ] Create base Pydantic models for validation
 - [ ] Set up error handling and logging middleware
 - [ ] Configure environment variable management
-- [ ] Create health check endpoint
+- [x] Create health check endpoint
 
 ### 2.2 Data Models (Pydantic)
 - [ ] Create `Job` model with validation rules
@@ -177,24 +177,24 @@ Transitioning JADE from a high-volume batch CSV processor to a high-fidelity ver
 ## Phase 3: Frontend Development (Next.js)
 
 ### 3.1 Core App Structure
-- [ ] Set up App Router file structure
+- [x] Set up App Router file structure
 - [ ] Configure Supabase client (`lib/supabase.ts`)
 - [ ] Create FastAPI client wrapper (`lib/api.ts`)
-- [ ] Define TypeScript types (`lib/types.ts`) mirroring backend DTOs
+- [ ] Define TypeScript types (`lib/types.ts`) mirroring backend DTOs (partial - basic Job type exists)
 - [ ] Set up authentication flow with Supabase Auth
 - [ ] Create protected route middleware
 - [ ] Implement error boundary components
 
 ### 3.2 Shared UI Components
-- [ ] Create base UI component library (`components/ui/`):
-  - [ ] Button variants
-  - [ ] Modal/Dialog
-  - [ ] Input fields
+- [x] Create base UI component library (`components/ui/`):
+  - [x] Button variants
+  - [x] Modal/Dialog
+  - [x] Input fields (FileUpload)
   - [ ] Tables
-  - [ ] Loading indicators
+  - [x] Loading indicators
   - [ ] Toast notifications
-- [ ] Set up Tailwind CSS or preferred styling solution
-- [ ] Create layout components (header, sidebar, footer)
+- [x] Set up Tailwind CSS configuration
+- [x] Create layout components (Header, PageHeader, SectionCard)
 
 ### 3.3 Authentication Pages
 - [ ] Login page (`app/auth/login/page.tsx`)
@@ -232,17 +232,17 @@ Transitioning JADE from a high-volume batch CSV processor to a high-fidelity ver
   - [ ] Export org chart functionality
 
 ### 3.6 Job Analysis Interface
-- [ ] **Job Upload** (`app/org/[orgId]/jobs/new/page.tsx`):
-  - [ ] File upload component
-  - [ ] Drag-and-drop support
-  - [ ] Job metadata form
+- [x] **Job Upload** (`app/evaluate-job/page.tsx`):
+  - [x] File upload component
+  - [x] Drag-and-drop support
+  - [x] Job metadata form
   - [ ] Upload progress indicator
-- [ ] **Job Detail View** (`app/org/[orgId]/jobs/[jobId]/page.tsx`):
+- [ ] **Job Detail View** (page structure exists but not functional):
   - [ ] Display job information
   - [ ] Show original document
   - [ ] Trigger analysis button
   - [ ] Display analysis status
-- [ ] **Grading UI** (`components/grading/`):
+- [x] **Grading UI** (skeleton exists, needs API integration):
   - [ ] Factor score display cards
   - [ ] Confidence indicators (visual: progress bars, color coding)
   - [ ] Reasoning/explanation text boxes
@@ -278,14 +278,13 @@ Transitioning JADE from a high-volume batch CSV processor to a high-fidelity ver
 ## Phase 4: Integration & Contract Layer
 
 ### 4.1 Shared Type Definitions
-- [ ] Create JSON schemas for core entities (`shared/types/`):
-  - [ ] `job.json`
-  - [ ] `methodology.json`
-  - [ ] `agent_output.json`
-  - [ ] `organization.json`
-- [ ] Generate TypeScript types from schemas
-- [ ] Generate Python Pydantic models from schemas (or ensure sync)
-- [ ] Create constants file (`shared/constants/factor_keys.ts`)
+- [x] Create TypeScript type definitions for core entities (`shared/types/`):
+  - [x] `job.ts` - basic Job interface defined
+  - [ ] `methodology.ts`
+  - [ ] `agent_output.ts`
+  - [ ] `organization.ts`
+- [ ] Generate Python Pydantic models to match TypeScript types
+- [x] Create constants file (`shared/constants/factor_keys.ts`)
 - [ ] Set up type validation in CI/CD
 
 ### 4.2 API Integration

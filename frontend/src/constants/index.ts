@@ -8,7 +8,20 @@ export const ROUTES = {
   HOME: '/',
   EVALUATE_JOB: '/evaluate-job',
   EVALUATE_MULTIPLE: '/evaluate-multiple-jobs',
-  CREATE_SUMMARY: '/create-job-summary',
+} as const;
+
+// Wizard Configuration
+export const WIZARD = {
+  STEPS: {
+    JOB_UPLOAD: 1,
+    SUMMARY_SELECTION: 2,
+    AI_EVALUATION: 3,
+  },
+  LABELS: {
+    STEP_1: "Upload & Compare",
+    STEP_2: "Create Summary",
+    STEP_3: "Evaluate",
+  },
 } as const;
 
 // Button Labels
