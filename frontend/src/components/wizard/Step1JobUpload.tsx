@@ -42,7 +42,7 @@ export default function Step1JobUpload({ state, updateState }: Step1Props) {
   const hasJobs = state.isMultipleJobs ? state.jobs.length > 0 : state.jobData !== null;
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-6 animate-in fade-in duration-500">
       <SectionCard 
         title={state.isMultipleJobs ? "What jobs do you want to evaluate using AI?" : "What job do you want to evaluate using AI?"}
         subtitle={state.isMultipleJobs 
@@ -57,7 +57,7 @@ export default function Step1JobUpload({ state, updateState }: Step1Props) {
             label={state.isMultipleJobs ? "Import and check" : undefined}
           />
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-4">
             <QualityFlag 
               status="passed" 
               message={state.isMultipleJobs 
@@ -94,10 +94,11 @@ export default function Step1JobUpload({ state, updateState }: Step1Props) {
                 { value: "no", label: "No thanks" },
                 { value: "human", label: "Compare to Human Score(s)" }
               ]}
+              className="text-sm"
             />
 
             {state.comparisonOption === "human" && (
-              <div className="mt-4 animate-in fade-in zoom-in-95 duration-200">
+              <div className="mt-3 animate-in fade-in zoom-in-95 duration-200">
                 <Select
                   label={state.isMultipleJobs ? "Human evaluation dataset:" : "Human evaluation:"}
                   value={state.humanEvaluation}

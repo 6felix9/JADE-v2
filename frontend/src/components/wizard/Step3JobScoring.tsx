@@ -18,6 +18,7 @@ interface Step3Props {
 
 export default function Step3JobScoring({ state, updateState }: Step3Props) {
   const [expandedResults, setExpandedResults] = useState<Record<string, boolean>>({});
+  const [isSummariesExpanded, setIsSummariesExpanded] = useState(false);
 
   const toggleResult = (jobId: string) => {
     setExpandedResults(prev => ({
@@ -51,13 +52,35 @@ export default function Step3JobScoring({ state, updateState }: Step3Props) {
   const anyFactorSelected = Object.values(state.selectedFactors).some(v => v);
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-6 animate-in fade-in duration-500">
       {/* Summary Review */}
       <SectionCard 
         title="Job Summaries for Evaluation" 
         subtitle="Review the summaries that will be used for AI scoring."
       >
-        <JobSummaryViewer summaries={state.finalSummaries} />
+        <div className="space-y-3">
+          <div className="flex items-center justify-between p-3 bg-surface border border-border rounded-lg">
+            <div className="flex items-center space-x-2 text-foreground font-medium">
+              <Info className="w-5 h-5 text-muted" />
+              <span className="text-sm">{state.finalSummaries.length} Job summaries ready</span>
+            </div>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => setIsSummariesExpanded(!isSummariesExpanded)}
+              className="text-primary hover:text-primary-hover font-semibold flex items-center space-x-1"
+            >
+              <span className="text-sm">Click to {isSummariesExpanded ? 'hide' : 'view'}</span>
+              {isSummariesExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+            </Button>
+          </div>
+
+          {isSummariesExpanded && (
+            <div className="animate-in slide-in-from-top-2 duration-200">
+              <JobSummaryViewer summaries={state.finalSummaries} />
+            </div>
+          )}
+        </div>
       </SectionCard>
 
       {/* Factor Selection */}
@@ -74,18 +97,18 @@ export default function Step3JobScoring({ state, updateState }: Step3Props) {
       {/* Scoring Action */}
       {!state.showResults && (
         <SectionCard title="Generate AI Evaluation">
-          <div className="flex flex-col items-center space-y-4 py-4">
-            <p className="text-muted text-center max-w-md">
+          <div className="flex flex-col items-center space-y-3 py-2">
+            <p className="text-muted text-sm text-center max-w-md">
               The AI will analyze the job summaries based on your selected factors to determine the job level and scores.
             </p>
             <Button 
               onClick={handleScoreJobs} 
               disabled={!anyFactorSelected || state.isScoring}
-              className="w-full md:w-auto px-6 py-4 text-lg h-auto"
+              className="w-full md:w-auto px-5 py-3 text-base h-auto"
             >
               {state.isScoring ? (
                 <div className="flex items-center space-x-2">
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-background"></div>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-background"></div>
                   <span>Scoring Jobs...</span>
                 </div>
               ) : (
@@ -103,41 +126,41 @@ export default function Step3JobScoring({ state, updateState }: Step3Props) {
             title="Evaluation Results" 
             subtitle="AI generated scores for each job based on selected factors."
           >
-            <div className="space-y-4">
+            <div className="space-y-3">
               {state.evaluationResults.map((result) => (
                 <div key={result.jobId} className="border border-border rounded-xl overflow-hidden">
                   <button 
                     onClick={() => toggleResult(result.jobId)}
-                    className="w-full flex items-center justify-between p-4 bg-surface hover:bg-border/10 transition-colors"
+                    className="w-full flex items-center justify-between p-3 bg-surface hover:bg-border/10 transition-colors"
                   >
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                        <BarChart3 className="w-5 h-5" />
+                    <div className="flex items-center space-x-2.5">
+                      <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <BarChart3 className="w-4.5 h-4.5" />
                       </div>
                       <div className="text-left">
-                        <h4 className="font-bold text-foreground">{result.jobTitle}</h4>
-                        <div className="flex items-center space-x-2 mt-1">
-                           <span className="text-xs font-medium px-2 py-0.5 bg-primary/10 text-primary rounded-full">
+                        <h4 className="font-bold text-sm text-foreground">{result.jobTitle}</h4>
+                        <div className="flex items-center space-x-2 mt-0.5">
+                           <span className="text-[10px] font-medium px-2 py-0.5 bg-primary/10 text-primary rounded-full">
                             Overall: {result.overallScore}
                           </span>
-                          <span className="text-xs font-medium px-2 py-0.5 bg-success/10 text-success rounded-full">
+                          <span className="text-[10px] font-medium px-2 py-0.5 bg-success/10 text-success rounded-full">
                             {result.confidence}% confidence
                           </span>
                         </div>
                       </div>
                     </div>
-                    {expandedResults[result.jobId] ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                    {expandedResults[result.jobId] ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </button>
                   
                   {expandedResults[result.jobId] && (
-                    <div className="p-6 bg-background border-t border-border animate-in slide-in-from-top-2 duration-200">
-                      <h5 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Factor Scores</h5>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="p-4 bg-background border-t border-border animate-in slide-in-from-top-2 duration-200">
+                      <h5 className="text-[10px] font-semibold text-foreground uppercase tracking-wider mb-3">Factor Scores</h5>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {Object.entries(result.scores).map(([factor, score]) => (
-                          <div key={factor} className="space-y-2">
+                          <div key={factor} className="space-y-1">
                             <div className="flex justify-between items-center">
-                              <span className="text-sm font-medium text-foreground capitalize">{factor}</span>
-                              <span className="text-sm font-bold text-primary">{score}/5</span>
+                              <span className="text-xs font-medium text-foreground capitalize">{factor}</span>
+                              <span className="text-xs font-bold text-primary">{score}/5</span>
                             </div>
                           </div>
                         ))}

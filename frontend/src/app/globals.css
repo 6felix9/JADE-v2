@@ -22,9 +22,19 @@
 }
 
 @layer components {
+  /* Default card surface with consistent shadow and radius */
   .surface-card {
     @apply bg-background border border-border shadow-sm rounded-xl;
   }
+}
+
+/* Compact layout utilities */
+.compact-y {
+  @apply space-y-4;
+}
+
+.compact-p {
+  @apply p-6;
 }
 
 /* Custom scrollbar styles */

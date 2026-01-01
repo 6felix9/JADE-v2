@@ -37,7 +37,7 @@ export default function Modal({ isOpen, onClose, title, children, size = "md" }:
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" 
@@ -49,18 +49,18 @@ export default function Modal({ isOpen, onClose, title, children, size = "md" }:
         className={`relative bg-background rounded-xl shadow-xl w-full ${sizeClasses[size]} overflow-hidden animate-in zoom-in-95 fade-in duration-200`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between p-4 border-b border-border">
-          <h2 className="text-xl font-bold text-foreground">{title}</h2>
+        <div className="flex items-center justify-between p-3 border-b border-border">
+          <h2 className="text-lg font-bold text-foreground">{title}</h2>
           <Button
             variant="ghost"
             size="icon"
             onClick={onClose}
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5" />
           </Button>
         </div>
         
-        <div className="p-6">
+        <div className="p-5">
           {children}
         </div>
       </div>

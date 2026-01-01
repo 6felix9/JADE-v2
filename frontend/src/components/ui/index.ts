@@ -3,7 +3,6 @@
  * This file provides a centralized import point for all UI components
  */
 
-export { default as ActionButtons } from './ActionButtons';
 export { default as Button } from './Button';
 export { default as DashboardButton } from './DashboardButton';
 export { default as FactorSelection } from './FactorSelection';

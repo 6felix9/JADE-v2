@@ -17,17 +17,17 @@ export default function QualityFlag({ status, message }: QualityFlagProps) {
   const Icon = isPassed ? CheckCircle2 : AlertCircle;
 
   return (
-    <div className={`flex items-center justify-between p-4 ${bgColor} border ${borderColor} rounded-lg`}>
-      <div className="flex items-center space-x-3">
-        <Icon className={`w-6 h-6 ${iconColor}`} />
+    <div className={`flex items-center justify-between p-3 ${bgColor} border ${borderColor} rounded-lg`}>
+      <div className="flex items-center space-x-2.5">
+        <Icon className={`w-5 h-5 ${iconColor}`} />
         <div>
-          <span className={`font-semibold ${textColor}`}>
+          <span className={`font-semibold text-sm ${textColor}`}>
             {isPassed ? "Quality Check Passed" : "Quality Check Failed"}
           </span>
-          {message && <p className={`text-sm ${textColor}`}>{message}</p>}
+          {message && <p className={`text-xs ${textColor}`}>{message}</p>}
         </div>
       </div>
-      <div className={`text-xs font-bold uppercase tracking-wider ${badgeText} ${badgeBg} px-2 py-1 rounded`}>
+      <div className={`text-[10px] font-bold uppercase tracking-wider ${badgeText} ${badgeBg} px-1.5 py-0.5 rounded`}>
         {isPassed ? "PASSED" : "FAILED"}
       </div>
     </div>

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import {
   PageHeader,
-  ActionButtons
+  Button
 } from "@/components/ui";
 import { 
   Step1JobUpload, 
@@ -13,7 +13,7 @@ import {
   Step3JobScoring 
 } from "@/components/wizard";
 import { WizardState, StepConfig } from "@/types";
-import { WIZARD } from "@/constants";
+import { WIZARD, BUTTON_LABELS } from "@/constants";
 
 const WIZARD_STEPS: StepConfig[] = [
   {
@@ -141,23 +141,23 @@ export default function EvaluateMultipleJobsPage() {
   const isCurrentStepValid = currentStepConfig?.validate(wizardState) ?? false;
 
   return (
-    <main className="min-h-screen bg-surface flex flex-col pb-12">
+    <main className="min-h-screen bg-surface flex flex-col pb-6">
       <Header />
       
-      <div className="max-w-4xl mx-auto w-full px-6 pt-8 space-y-8">
+      <div className="max-w-4xl mx-auto w-full px-6 pt-4 space-y-4">
         <PageHeader 
           title={currentStepConfig?.title || "Evaluate Multiple Jobs"} 
           onBack={handleBack} 
         />
 
         {/* Wizard Progress */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-2">
           {WIZARD_STEPS.map((step) => (
             <div key={step.id} className="flex flex-col items-center flex-1">
               <div className={`h-1 w-full rounded-full ${
                 step.id <= wizardState.currentStep ? "bg-primary" : "bg-border"
               }`} />
-              <span className={`text-[10px] uppercase font-bold mt-2 ${
+              <span className={`text-[10px] uppercase font-bold mt-1 ${
                 step.id === wizardState.currentStep ? "text-primary" : "text-muted"
               }`}>
                 {step.label}
@@ -166,7 +166,7 @@ export default function EvaluateMultipleJobsPage() {
           ))}
         </div>
 
-        <div className="min-h-[400px]">
+        <div className="min-h-[300px]">
           {wizardState.currentStep === 1 && (
             <Step1JobUpload state={wizardState} updateState={updateWizardState} />
           )}
@@ -178,15 +178,26 @@ export default function EvaluateMultipleJobsPage() {
           )}
         </div>
 
-        <ActionButtons 
-          onCancel={() => router.push("/")}
-          onReset={handleReset}
-          onNext={handleNext}
-          onBack={handleBack}
-          showBack={wizardState.currentStep > 1}
-          nextDisabled={!isCurrentStepValid}
-          nextLabel={wizardState.currentStep === 3 ? "Finish" : "Next Step"}
-        />
+        <div className="flex justify-between items-center pt-6 border-t border-border mt-3">
+          <div className="flex space-x-3">
+            <div className="flex space-x-3">
+              <Button variant="ghost" onClick={() => router.push("/")}>
+                {BUTTON_LABELS.CANCEL}
+              </Button>
+              <Button variant="secondary" onClick={handleReset}>
+                {BUTTON_LABELS.RESET}
+              </Button>
+            </div>
+          </div>
+
+          <Button
+            disabled={!isCurrentStepValid}
+            onClick={handleNext}
+            className="font-bold min-w-[120px]"
+          >
+            {wizardState.currentStep === 3 ? "Finish" : "Next Step"}
+          </Button>
+        </div>
       </div>
     </main>
   );

@@ -66,6 +66,7 @@ export interface WizardState {
 
   // Step 2: Summary Selection
   isCheckingSummaries: boolean;
+  isGeneratingSummaries?: boolean;
   hasExistingSummaries: boolean;
   summaryOption: "use-existing" | "create-new" | null;
   finalSummaries: JobSummary[];

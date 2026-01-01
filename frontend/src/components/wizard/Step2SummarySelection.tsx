@@ -40,47 +40,54 @@ export default function Step2SummarySelection({ state, updateState }: Step2Props
   };
 
   const handleGenerateSummaries = () => {
-    updateState({ finalSummaries: mockNewSummaries });
+    updateState({ isGeneratingSummaries: true });
+    
+    setTimeout(() => {
+      updateState({ 
+        finalSummaries: mockNewSummaries,
+        isGeneratingSummaries: false
+      });
+    }, 1500);
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-6 animate-in fade-in duration-500">
       {state.isCheckingSummaries ? (
-        <div className="flex flex-col items-center justify-center p-20 space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-          <p className="text-muted font-medium animate-pulse">Checking Library for existing summaries...</p>
+        <div className="flex flex-col items-center justify-center p-16 space-y-3">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary"></div>
+          <p className="text-muted text-sm font-medium animate-pulse">Checking Library for existing summaries...</p>
         </div>
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {state.hasExistingSummaries && (
-            <SectionCard className="p-4">
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3 p-3 bg-warning/10 border border-warning/20 rounded-lg text-warning">
-                  <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                  <p className="text-sm font-medium">
+            <SectionCard className="p-3">
+              <div className="space-y-2.5">
+                <div className="flex items-center space-x-2.5 p-2.5 bg-warning/10 border border-warning/20 rounded-lg text-warning">
+                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                  <p className="text-xs font-medium">
                     A Job Summary already exists for one or more jobs in the Library.
                   </p>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   <Button 
                     variant="secondary" 
                     size="sm"
                     onClick={() => updateState({ showExistingSummariesModal: true })}
-                    className="w-full flex items-center justify-center space-x-2"
+                    className="w-full flex items-center justify-center space-x-2 py-1.5"
                   >
-                    <FileText className="w-4 h-4" />
-                    <span>View existing summaries</span>
+                    <FileText className="w-3.5 h-3.5" />
+                    <span className="text-sm">View existing summaries</span>
                   </Button>
 
-                  <div className="pt-3 border-t border-border">
-                    <p className="text-xs font-semibold text-foreground mb-2">
+                  <div className="pt-2.5 border-t border-border">
+                    <p className="text-[11px] font-semibold text-foreground mb-1.5">
                       Do you want to use these existing summaries, or create new ones to be used for the AI evaluation?
                     </p>
                     <RadioGroup
                       name="summary-choice"
                       value={state.summaryOption || ""}
                       onChange={handleOptionSelect}
-                      className="text-sm"
+                      className="text-[11px]"
                       options={[
                         { 
                           value: "use-existing", 
@@ -93,56 +100,82 @@ export default function Step2SummarySelection({ state, updateState }: Step2Props
                       ]}
                     />
                   </div>
-
-                  {state.summaryOption === "create-new" && state.finalSummaries.length === 0 && (
-                    <div className="pt-3 border-t border-border">
-                      <Button 
-                        onClick={handleGenerateSummaries}
-                        className="w-full"
-                      >
-                        Generate job summaries
-                      </Button>
-                    </div>
-                  )}
                 </div>
               </div>
             </SectionCard>
           )}
 
-          <SectionCard 
-            title="Job Summaries Generation" 
-            subtitle={state.finalSummaries.length > 0 ? "The job summaries have been prepared for your review." : state.hasExistingSummaries && state.summaryOption ? (state.summaryOption === "create-new" ? "Click 'Generate job summaries' above to create new summaries." : "") : state.hasExistingSummaries ? "Select an option above to proceed." : "Generating job summaries..."}
-          >
-            {state.finalSummaries.length > 0 ? (
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-primary/10 border border-primary/20 rounded-lg">
-                  <div className="flex items-center space-x-3 text-primary font-medium">
-                    <FileText className="w-6 h-6" />
-                    <span>{state.finalSummaries.length} Job summaries generated</span>
-                  </div>
-                  <Button 
-                    variant="ghost" 
-                    onClick={() => updateState({ isSummaryExpanded: !state.isSummaryExpanded })}
-                    className="text-primary hover:text-primary-hover font-semibold flex items-center space-x-1"
-                  >
-                    <span>Click to {state.isSummaryExpanded ? 'hide' : 'view'}</span>
-                    {state.isSummaryExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                  </Button>
-                </div>
+          {state.summaryOption === "create-new" && state.finalSummaries.length === 0 && (
+            <SectionCard title="Generate Job Summaries">
+              <div className="flex flex-col items-center space-y-3 py-2">
+                <p className="text-muted text-sm text-center max-w-md">
+                  The AI will analyze the job descriptions to create concise summaries for evaluation.
+                </p>
+                <Button 
+                  onClick={handleGenerateSummaries} 
+                  disabled={state.isGeneratingSummaries}
+                  className="w-full md:w-auto px-5 py-3 text-base h-auto"
+                >
+                  {state.isGeneratingSummaries ? (
+                    <div className="flex items-center space-x-2">
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-background"></div>
+                      <span>Generating Summaries...</span>
+                    </div>
+                  ) : (
+                    "Generate Job Summaries"
+                  )}
+                </Button>
+              </div>
+            </SectionCard>
+          )}
 
-                {state.isSummaryExpanded && (
-                  <div>
-                    <JobSummaryViewer summaries={state.finalSummaries} />
-                  </div>
-                )}
-              </div>
-            ) : !state.hasExistingSummaries ? (
-              <div className="p-12 border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center space-y-3 text-muted">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-                <p>Generating summaries...</p>
-              </div>
-            ) : null}
-          </SectionCard>
+          {(!state.summaryOption || state.finalSummaries.length > 0) && (
+            <SectionCard 
+              title="Job Summaries Review" 
+              subtitle={
+                state.finalSummaries.length > 0
+                  ? (state.summaryOption === "use-existing"
+                      ? "Existing job summaries from the Library will be used for evaluation."
+                      : "The new job summaries have been prepared for your review.")
+                  : "Select an option or generate summaries to review."
+              }
+            >
+              {state.finalSummaries.length > 0 ? (
+                <div className="space-y-3">
+                  {state.summaryOption === "use-existing" ? (
+                    <div className="flex items-center space-x-2 p-3 bg-surface border border-border rounded-lg text-foreground font-medium">
+                      <FileText className="w-5 h-5 text-muted" />
+                      <span className="text-sm">Using existing summaries from Library</span>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="flex items-center justify-between p-3 bg-primary/10 border border-primary/20 rounded-lg">
+                        <div className="flex items-center space-x-2 text-primary font-medium">
+                          <FileText className="w-5 h-5" />
+                          <span className="text-sm">{state.finalSummaries.length} Job summaries generated</span>
+                        </div>
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          onClick={() => updateState({ isSummaryExpanded: !state.isSummaryExpanded })}
+                          className="text-primary hover:text-primary-hover font-semibold flex items-center space-x-1"
+                        >
+                          <span className="text-sm">Click to {state.isSummaryExpanded ? 'hide' : 'view'}</span>
+                          {state.isSummaryExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                        </Button>
+                      </div>
+
+                      {state.isSummaryExpanded && (
+                        <div className="animate-in slide-in-from-top-2 duration-200">
+                          <JobSummaryViewer summaries={state.finalSummaries} />
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              ) : null}
+            </SectionCard>
+          )}
         </div>
       )}
 
@@ -154,11 +187,10 @@ export default function Step2SummarySelection({ state, updateState }: Step2Props
         size="lg"
       >
         <JobSummaryViewer summaries={mockExistingSummaries} />
-        <div className="mt-6 flex justify-end">
-          <Button onClick={() => updateState({ showExistingSummariesModal: false })}>Close</Button>
+        <div className="mt-4 flex justify-end">
+          <Button size="sm" onClick={() => updateState({ showExistingSummariesModal: false })}>Close</Button>
         </div>
       </Modal>
     </div>
   );
 }
-

@@ -20,11 +20,12 @@ export default function FileUpload({ onFileSelect, accept, label = "Import and c
   };
 
   return (
-    <div className="flex flex-col items-center justify-center border-2 border-dashed border-border rounded-lg p-12 bg-surface space-y-4 transition-colors hover:border-primary/50">
-      <Upload className="w-12 h-12 text-muted" />
+    <div className="flex flex-col items-center justify-center border-2 border-dashed border-border rounded-lg p-8 bg-surface space-y-3 transition-colors hover:border-primary/50">
+      <Upload className="w-10 h-10 text-muted" />
       <Button
         variant="primary"
         onClick={() => fileInputRef.current?.click()}
+        size="sm"
       >
         {label}
       </Button>

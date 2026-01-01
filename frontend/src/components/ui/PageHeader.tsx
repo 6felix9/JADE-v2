@@ -10,7 +10,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, onBack }: PageHeaderProps) {
   return (
-    <div className="flex items-center space-x-4 mb-8">
+    <div className="flex items-center space-x-3 mb-6">
       {onBack && (
         <Button
           variant="ghost"
@@ -18,10 +18,10 @@ export default function PageHeader({ title, onBack }: PageHeaderProps) {
           onClick={onBack}
           aria-label="Go back"
         >
-          <ChevronLeft className="w-6 h-6 text-muted" />
+          <ChevronLeft className="w-5 h-5 text-muted" />
         </Button>
       )}
-      <h1 className="text-3xl font-bold text-foreground">{title}</h1>
+      <h1 className="text-2xl font-bold text-foreground">{title}</h1>
     </div>
   );
 }
