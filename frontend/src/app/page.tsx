@@ -31,6 +31,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <DashboardButton
               title="Org Setup"
+              onClick={() => router.push("/org-setup")}
             />
             <DashboardButton
               title="Human Evaluations"
