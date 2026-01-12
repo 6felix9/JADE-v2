@@ -100,3 +100,10 @@ export interface StepConfig {
   label: string;
   validate: (state: WizardState) => boolean;
 }
+
+// Evaluation Factor Interface
+export interface Factor {
+  id: string; // UUID or timestamp-based ID
+  name: string;
+  description: string;
+}
