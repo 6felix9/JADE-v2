@@ -172,6 +172,17 @@ Transitioning JADE from a high-volume batch CSV processor to a high-fidelity ver
   - [ ] Score aggregation and weighting
 - [ ] Create database query helpers (`db/queries.py`)
 
+### Recent Additions (Not in original plan)
+
+**PR #1: Questionnaire Management (feat/jaq)**
+- [x] Questionnaire listing page (`app/questionnaire/page.tsx`)
+- [x] Questionnaire detail/edit page (`app/questionnaire/[id]/page.tsx`)
+- [x] Question builder component (QuestionBuilder.tsx) with text & multiple-choice support
+- [x] Questionnaire preview modal (PreviewModal.tsx)
+- [x] Google Forms export functionality (googleFormsExport.ts)
+- [x] Questionnaire persistence (questionnaireStorage.ts)
+- [x] Extended types: `Question` and `Questionnaire` interfaces
+
 ---
 
 ## Phase 3: Frontend Development (Next.js)
@@ -190,7 +201,7 @@ Transitioning JADE from a high-volume batch CSV processor to a high-fidelity ver
   - [x] Button variants
   - [x] Modal/Dialog
   - [x] Input fields (FileUpload)
-  - [ ] Tables
+  - [x] Tables (FactorTable implemented in PR #2)
   - [x] Loading indicators
   - [ ] Toast notifications
 - [x] Set up Tailwind CSS configuration
@@ -211,12 +222,13 @@ Transitioning JADE from a high-volume batch CSV processor to a high-fidelity ver
   - [ ] Organization profile editor
   - [ ] User management interface
   - [ ] Permissions configuration
-- [ ] **Methodology Editor** (`app/org/[orgId]/settings/methodology/page.tsx`):
+- [x] **Methodology Editor** (PR #2 `app/org-setup/page.tsx` - preliminary version):
+  - [x] Factor addition/removal UI (FactorTable with full CRUD)
+  - [x] Factor description editing (FactorModal for edit capability)
   - [ ] Dynamic form generator based on JSONB schema
-  - [ ] Factor addition/removal UI
   - [ ] Weight adjustment controls
   - [ ] Methodology preview
-  - [ ] Save/publish workflow
+  - [ ] Save/publish workflow (currently uses localStorage)
 
 ### 3.5 Organization Chart Visualization
 - [ ] Install and configure React Flow
@@ -280,6 +292,8 @@ Transitioning JADE from a high-volume batch CSV processor to a high-fidelity ver
 ### 4.1 Shared Type Definitions
 - [x] Create TypeScript type definitions for core entities (`shared/types/`):
   - [x] `job.ts` - basic Job interface defined
+  - [x] `Factor` interface added (PR #2)
+  - [x] `Question` and `Questionnaire` interfaces added (PR #1)
   - [ ] `methodology.ts`
   - [ ] `agent_output.ts`
   - [ ] `organization.ts`
