@@ -121,3 +121,10 @@ export interface Questionnaire {
   createdAt: string;
   updatedAt: string;
 }
+
+// Factor Interface for Organization Setup
+export interface Factor {
+  id: string;
+  name: string;
+  description: string;
+}
