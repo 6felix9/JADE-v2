@@ -8,6 +8,7 @@ export const ROUTES = {
   HOME: '/',
   EVALUATE_JOB: '/evaluate-job',
   EVALUATE_MULTIPLE: '/evaluate-multiple-jobs',
+  QUESTIONNAIRE: '/questionnaire',
 } as const;
 
 // Wizard Configuration
@@ -53,4 +54,15 @@ export const QUALITY_MESSAGES = {
 export const COMPARISON_OPTIONS = {
   NO: 'no',
   HUMAN: 'human',
+} as const;
+
+// Storage Keys
+export const STORAGE_KEYS = {
+  QUESTIONNAIRES: 'jade_questionnaires',
+} as const;
+
+// Question Types
+export const QUESTION_TYPES = {
+  TEXT: 'text',
+  MULTIPLE_CHOICE: 'multiple_choice',
 } as const;

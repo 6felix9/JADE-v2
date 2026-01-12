@@ -27,8 +27,8 @@ export default function Home() {
             <DashboardButton title="Validation & Reporting" />
           </div>
 
-          {/* Bottom Row - 1x3 Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Bottom Row - 1x4 Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <DashboardButton
               title="Org Setup"
               onClick={() => router.push("/org-setup")}
@@ -38,6 +38,10 @@ export default function Home() {
             />
             <DashboardButton
               title="Library"
+            />
+            <DashboardButton
+              title="Questionnaire"
+              onClick={() => router.push("/questionnaire")}
             />
           </div>
         </div>
