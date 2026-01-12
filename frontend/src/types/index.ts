@@ -100,3 +100,24 @@ export interface StepConfig {
   label: string;
   validate: (state: WizardState) => boolean;
 }
+
+// Questionnaire Types
+export type QuestionType = 'text' | 'multiple_choice';
+
+export interface Question {
+  id: string;
+  type: QuestionType;
+  question: string;
+  required: boolean;
+  // For multiple choice questions
+  options?: string[];
+}
+
+export interface Questionnaire {
+  id: string;
+  title: string;
+  description: string;
+  questions: Question[];
+  createdAt: string;
+  updatedAt: string;
+}
